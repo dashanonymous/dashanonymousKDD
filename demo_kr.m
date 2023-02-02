@@ -6,18 +6,32 @@ PARFOR_FLAG = 0;
 
 
 %% Load Data
-fname = '../data/KR/stock_date_kv_kr.json';
+
+
+fname = './data/KR/stock_date_kv_kr.json';
 fid = fopen(fname);
 raw = fread(fid,inf);
 str = char(raw');
 fclose(fid);
 val = jsondecode(str);
 time_indices = struct2cell(val);
-time_indices = time_indices(1:1000);
 
  
-filename = '../data/KR/kr_stock1.mat';
-X = load(filename).data;
+filename = './data/KR/kr_stock1.mat';
+x1 = load(filename).data;
+
+filename = './data/KR/kr_stock2.mat';
+x2 = load(filename).data;
+
+filename = './data/KR/kr_stock3.mat';
+x3 = load(filename).data;
+
+filename = './data/KR/kr_stock4.mat';
+x4 = load(filename).data;
+
+X = cat(2, x1, x2);
+X = cat(2, X, x3);
+X = cat(2, X, x4);
 
 
 K = size(X,2);
